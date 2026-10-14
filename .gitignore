@@ -1,0 +1,7 @@
+# Dependencias (se reinstalan con npm install)
+node_modules/
+
+# Resultados y reportes que se generan al correr las pruebas
+reportes/
+playwright-report/
+test-results/

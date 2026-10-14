@@ -1,0 +1,21 @@
+{
+  "name": "pruebas",
+  "version": "1.0.0",
+  "description": "Pruebas automatizadas de Patitas Juntas (Playwright + POM)",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node scripts/correr-pruebas.js",
+    "test:ui": "playwright test --ui",
+    "reporte": "node scripts/abrir-reporte.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}
