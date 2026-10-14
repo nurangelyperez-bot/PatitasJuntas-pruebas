@@ -1,0 +1,46 @@
+# ============================================================
+# ROBOT DE INTEGRACION CONTINUA (CI) - GitHub Actions
+# ------------------------------------------------------------
+# Cada vez que subes codigo (push), este robot:
+#   1. Prepara una computadora en la nube
+#   2. Instala el proyecto y el navegador
+#   3. Corre las pruebas de Playwright (npm test)
+#   4. Guarda el reporte como archivo descargable
+# Si las pruebas fallan, el robot se pone en rojo (X).
+# ============================================================
+
+name: Pruebas Patitas Juntas
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Bajar el codigo
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependencias del proyecto
+        run: npm ci
+
+      - name: Instalar el navegador Chrome
+        run: npx playwright install --with-deps chrome
+
+      - name: Correr las pruebas
+        run: npm test
+
+      - name: Guardar el reporte (aunque falle)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-playwright
+          path: reportes/
